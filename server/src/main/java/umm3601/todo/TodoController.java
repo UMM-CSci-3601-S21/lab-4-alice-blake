@@ -104,7 +104,7 @@ public class TodoController {
    *
    * @param ctx a Javalin HTTP context
    */
-  public void deleteUser(Context ctx) {
+  public void deleteTodo(Context ctx) {
     String id = ctx.pathParam("id");
     todoCollection.deleteOne(eq("_id", new ObjectId(id)));
   }
@@ -114,7 +114,7 @@ public class TodoController {
    *
    * @param ctx a Javalin HTTP context
    */
-  public void addNewUser(Context ctx) {
+  public void addNewTodo(Context ctx) {
     Todo newTodo = ctx.bodyValidator(Todo.class)
       .check(usr -> usr.owner != null && usr.owner.length() > 0) //Verify that the todo has an owner that is not blank
       .check(usr -> usr.status.matches("^(true|false)$")) // Verify that the status is one of the valid statuses
