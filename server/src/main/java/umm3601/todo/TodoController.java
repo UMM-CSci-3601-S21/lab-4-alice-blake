@@ -80,7 +80,8 @@ public class TodoController {
     }
 
     if (ctx.queryParamMap().containsKey(STATUS_KEY)) {
-      filters.add(eq(STATUS_KEY, ctx.queryParam(STATUS_KEY)));
+      Boolean targetStatus = ctx.queryParam(STATUS_KEY, Boolean.class).get();
+      filters.add(eq(STATUS_KEY, targetStatus));
     }
 
     if (ctx.queryParamMap().containsKey(CATEGORY_KEY)) {

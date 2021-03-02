@@ -172,11 +172,7 @@ public class TodoControllerSpec {
     String result = ctx.resultString();
     Todo[] resultTodos = JavalinJson.fromJson(result, Todo[].class);
 
-<<<<<<< Updated upstream
-    assertEquals(4, resultTodos.length); //There should be 43 todos returned
-=======
-    assertEquals(1, resultTodos.length); //There should be 43 todos returned
->>>>>>> Stashed changes
+    assertEquals(4, resultTodos.length); //There should be 4 todos returned
     for (Todo todo : resultTodos) {
       assertEquals("Blanche", todo.owner); //Every todo should be owner Blanche
     }
@@ -225,7 +221,7 @@ assertEquals(1, resultTodos.length); //There should be 1 todos returned
 for (Todo todo : resultTodos) {
   assertEquals("Aliqua esse aliqua veniam id nisi ea. Ullamco Lorem ex aliqua aliquip cupidatat incididunt reprehenderit voluptate ad nisi elit dolore laboris.", todo.body); //Only one todo should return because there's only
   // one todo where 'dolore' appears in the body
-}
+  }
 } // End of Test for getTodosByBody
 
   @Test
@@ -240,7 +236,7 @@ for (Todo todo : resultTodos) {
 
     Todo[] resultTodos = JavalinJson.fromJson(result, Todo[].class);
 
-    assertEquals(3, resultTodos.length);
+    assertEquals(4, resultTodos.length);
     for(Todo todo : resultTodos) {
       assertEquals(true, todo.status);
     }
