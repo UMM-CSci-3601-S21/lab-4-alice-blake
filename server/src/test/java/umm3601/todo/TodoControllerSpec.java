@@ -88,6 +88,36 @@ public class TodoControllerSpec {
       .append("status", false)
       .append("body", "In sunt ex non tempor cillum commodo amet incididunt anim qui commodo quis. Cillum non labore ex sint esse.")
       .append("category", "software design"));
+    testTodos.add(
+      new Document()
+      .append("owner", "Blanche")
+      .append("status", true)
+      .append("body", "Incididunt enim ea sit qui esse magna eu. Nisi sunt exercitation est Lorem consectetur incididunt cupidatat laboris commodo veniam do ut sint.")
+      .append("category", "software design"));
+    testTodos.add(
+      new Document()
+      .append("owner", "Blanche")
+      .append("status", true)
+      .append("body", "Aliqua esse aliqua veniam id nisi ea. Ullamco Lorem ex aliqua aliquip cupidatat incididunt reprehenderit voluptate ad nisi elit dolore laboris.")
+      .append("category", "groceries"));
+    testTodos.add(
+      new Document()
+      .append("owner", "Barry")
+      .append("status", true)
+      .append("body", "Nisi sit non non sunt veniam pariatur. Elit reprehenderit aliqua consectetur est dolor officia et adipisicing elit officia nisi elit enim nisi.")
+      .append("category", "video games"));
+    testTodos.add(
+      new Document()
+      .append("owner", "Blanche")
+      .append("status", false)
+      .append("body", "Laborum incididunt nisi eiusmod aliqua velit quis occaecat excepteur ut in ad. Commodo adipisicing sint ipsum irure amet exercitation voluptate mollit.")
+      .append("category", "homework"));
+    testTodos.add(
+      new Document()
+      .append("owner", "Workman")
+      .append("status", false)
+      .append("body", "Proident cupidatat exercitation id ullamco magna do qui aliquip id. Eiusmod labore non nostrud culpa duis incididunt incididunt esse occaecat amet officia.")
+      .append("category", "homework"));
 
 
     frysId = new ObjectId();
