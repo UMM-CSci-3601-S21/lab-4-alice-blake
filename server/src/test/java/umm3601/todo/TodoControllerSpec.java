@@ -172,11 +172,61 @@ public class TodoControllerSpec {
     String result = ctx.resultString();
     Todo[] resultTodos = JavalinJson.fromJson(result, Todo[].class);
 
+<<<<<<< Updated upstream
     assertEquals(4, resultTodos.length); //There should be 43 todos returned
+=======
+    assertEquals(1, resultTodos.length); //There should be 43 todos returned
+>>>>>>> Stashed changes
     for (Todo todo : resultTodos) {
       assertEquals("Blanche", todo.owner); //Every todo should be owner Blanche
     }
-  }
+  }// body and category
+
+@Test
+public void getTodosByCategory() throws IOException{
+
+  // Set the query string to test with
+  mockReq.setQueryString("category=homework");
+
+  // Create fake Javalin context
+  Context ctx = ContextUtil.init(mockReq, mockRes, "api/todos");
+
+  todoController.getTodos(ctx);
+
+    // The response status should be 200
+    assertEquals(200, mockRes.getStatus());
+
+    String result = ctx.resultString();
+    Todo[] resultTodos = JavalinJson.fromJson(result, Todo[].class);
+
+    assertEquals(3, resultTodos.length); //There should be 3 todos returned
+    for (Todo todo : resultTodos) {
+      assertEquals("homework", todo.category); //Every todo should have the category 'homework'
+
+}
+} //end of Test for getTodosByCategory
+
+@Test
+public void getTodosByBody() throws IOException{
+// Set the query string to test with
+mockReq.setQueryString("body=dolore");
+
+// Create fake Javalin context
+Context ctx = ContextUtil.init(mockReq, mockRes, "api/todos");
+
+todoController.getTodos(ctx);
+// The response status should be 200
+assertEquals(200, mockRes.getStatus());
+
+String result = ctx.resultString();
+Todo[] resultTodos = JavalinJson.fromJson(result, Todo[].class);
+
+assertEquals(1, resultTodos.length); //There should be 1 todos returned
+for (Todo todo : resultTodos) {
+  assertEquals("Aliqua esse aliqua veniam id nisi ea. Ullamco Lorem ex aliqua aliquip cupidatat incididunt reprehenderit voluptate ad nisi elit dolore laboris.", todo.body); //Only one todo should return because there's only
+  // one todo where 'dolore' appears in the body
+}
+} // End of Test for getTodosByBody
 
   @Test
   public void GetTodosByStatus() throws IOException {
