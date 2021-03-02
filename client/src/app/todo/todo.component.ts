@@ -6,7 +6,8 @@ import { TodoService } from './todo.service';
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
-  styleUrls: ['./todo.component.scss']
+  styleUrls: ['./todo.component.scss'],
+  providers: []
 })
 
 export class TodoComponent implements OnInit, OnDestroy {
@@ -18,6 +19,7 @@ export class TodoComponent implements OnInit, OnDestroy {
   public todoStatus: boolean;
   public todoBody: string;
   public todoCategory: string;
+  public viewType: 'card' | 'list' = 'card';
   getTodosSub: Subscription;
 
   // Inject the TodoService into this component.
@@ -25,7 +27,6 @@ export class TodoComponent implements OnInit, OnDestroy {
   //
   // We can call upon the service for interacting
   // with the server.
-
   constructor(private todoService: TodoService) {
 
   }
@@ -35,8 +36,8 @@ export class TodoComponent implements OnInit, OnDestroy {
     this.getTodosSub = this.todoService.getTodos({
       owner: this.todoOwner,
       category: this.todoCategory
-    }).subscribe(returnedUsers => {
-      this.serverFilteredTodos = returnedUsers;
+    }).subscribe(returnedTodos => {
+      this.serverFilteredTodos = returnedTodos;
       this.updateFilter();
     }, err => {
       console.log(err);
@@ -45,9 +46,13 @@ export class TodoComponent implements OnInit, OnDestroy {
 
   public updateFilter(): void {
     this.filteredTodos = this.todoService.filterTodos(
-      this.serverFilteredTodos, { owner: this.todoOwner, category: this.todoCategory });
+      this.serverFilteredTodos, { owner: this.todoOwner, category: this.todoCategory, body: this.todoBody });
   }
 
+  /**
+   * Starts an asynchronous operation to update the todos list
+   *
+   */
   ngOnInit(): void {
     this.getTodosFromServer();
   }
