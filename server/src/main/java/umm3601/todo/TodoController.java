@@ -117,7 +117,7 @@ public class TodoController {
   public void addNewTodo(Context ctx) {
     Todo newTodo = ctx.bodyValidator(Todo.class)
       .check(usr -> usr.owner != null && usr.owner.length() > 0) //Verify that the todo has an owner that is not blank
-      .check(usr -> usr.status.matches("^(true|false)$")) // Verify that the status is one of the valid statuses
+      //.check(usr -> usr.status.matches("^(true|false)$")) // Verify that the status is one of the valid statuses
       .check(usr -> usr.category != null && usr.category.length() > 0) // Verify that the todo has a category that is not blank
       .check(usr -> usr.body != null && usr.body.length() > 0) // Verify that the todo has a body that is not blank
       .get();
