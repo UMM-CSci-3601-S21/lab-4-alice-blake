@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Todo } from './todo';
+import { Todo, TodoStatus } from './todo';
 import { TodoService } from './todo.service';
 
 @Component({
@@ -16,8 +16,8 @@ export class TodoComponent implements OnInit, OnDestroy {
   public filteredTodos: Todo[];
 
   public todoOwner: string;
-  public todoStatus: boolean;
   public todoBody: string;
+  public todoStatus: boolean;
   public todoCategory: string;
   public viewType: 'card' | 'list' = 'card';
   getTodosSub: Subscription;
@@ -35,7 +35,8 @@ export class TodoComponent implements OnInit, OnDestroy {
     this.unsub();
     this.getTodosSub = this.todoService.getTodos({
       owner: this.todoOwner,
-      category: this.todoCategory
+      category: this.todoCategory,
+      status: this.todoStatus
     }).subscribe(returnedTodos => {
       this.serverFilteredTodos = returnedTodos;
       this.updateFilter();

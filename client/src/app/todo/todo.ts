@@ -6,4 +6,4 @@ export interface Todo {
   body: string;
 }
 
-//export type UserRole = 'admin' | 'editor' | 'viewer';
+export type TodoStatus = 'complete' | 'incomplete';

@@ -19,10 +19,10 @@ export class TodoService  {
         httpParams = httpParams.set('owner', filters.owner);
       }
       if (filters.status) {
-        httpParams = httpParams.set('age', filters.status.toString());
+        httpParams = httpParams.set('status', filters.status.toString());
       }
       if (filters.category) {
-        httpParams = httpParams.set('company', filters.category);
+        httpParams = httpParams.set('category', filters.category);
       }
     }
     return this.httpClient.get<Todo[]>(this.todoUrl, {
