@@ -12,21 +12,21 @@ export class MockTodoService extends TodoService {
   static testTodos: Todo[] = [
     {
       _id: 'chris_id',
-      owner: 'chris',
+      owner: 'Chris',
       status: true,
       body: 'string',
       category: 'test todos',
     },
     {
       _id: 'pat_id',
-      owner: 'pat',
+      owner: 'Pat',
       status: false,
       body: 'string',
       category: 'test todos',
     },
     {
       _id: 'jamie_id',
-      owner: 'jamie',
+      owner: 'Jamie',
       status: true,
       body: 'string',
       category: 'test todos',
@@ -37,8 +37,19 @@ export class MockTodoService extends TodoService {
     super(null);
   }
 
-  getTodos(): Observable<Todo[]> {
+  getTodos(filters: {owner?: string; status?: boolean; category?: string; body?: string}): Observable<Todo[]> {
     return of(MockTodoService.testTodos);
+  }
+
+  getTodosById(id: string): Observable<Todo> {
+    // If the specified ID is for the first test todo,
+    // return that todo, otherwise return `null` so
+    // we can test illegal user requests.
+    if (id === MockTodoService.testTodos[0]._id) {
+      return of (MockTodoService.testTodos[0]);
+    } else {
+      return of (null);
+    }
   }
 
 }
