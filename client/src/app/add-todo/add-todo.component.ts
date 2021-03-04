@@ -55,12 +55,8 @@ export class AddTodoComponent implements OnInit {
       // We allow alphanumeric input and limit the length for owner
       owner: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.minLength(2),
-        // In the real world you'd want to be very careful about having
-        // an upper limit like this because people can sometimes have
-        // very long names. This demonstrates that it's possible, though,
-        // to have maximum length limits.
-        Validators.maxLength(50),
+        Validators.minLength(2), //Sets the min required length, which is 2
+        Validators.maxLength(50), // Sets max limit of characters, which is 50
         (fc) => {
           if (fc.value.toLowerCase() === 'abc123' || fc.value.toLowerCase() === '123abc') {
             return ({existingOwner: true});
