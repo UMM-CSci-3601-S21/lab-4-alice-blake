@@ -22,8 +22,7 @@ export class AddTodoComponent implements OnInit {
     owner: [
       {type: 'required', message: 'Owner is required'},
       {type: 'minlength', message: 'Owner must be at least 2 characters long'},
-      {type: 'maxlength', message: 'Owner cannot be more than 50 characters long'},
-      {type: 'existingOwner', message: 'Owner has already been taken'}
+      {type: 'maxlength', message: 'Owner cannot be more than 50 characters long'}
     ],
 
     status: [
@@ -34,15 +33,13 @@ export class AddTodoComponent implements OnInit {
     category: [
       {type: 'required', message: 'Category is required'},
       {type: 'minlength', message: 'Category must be at least 2 characters long'},
-      {type: 'maxlength', message: 'Category cannot be more than 50 characters long'},
-      {type: 'existingCategory', message: 'Category has already been taken'}
+      {type: 'maxlength', message: 'Category cannot be more than 50 characters long'}
     ],
 
     body: [
       {type: 'required', message: 'Body is required'},
       {type: 'minLength', message: 'Body must be at least 2 characters long'},
-      {type: 'maxLength', message: 'Body cannot be more than 200 characters'},
-      {type: 'existingBody', message: 'Body has already been taken'}
+      {type: 'maxLength', message: 'Body cannot be more than 200 characters'}
     ],
   };
 
@@ -55,12 +52,8 @@ export class AddTodoComponent implements OnInit {
       // We allow alphanumeric input and limit the length for owner
       owner: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.minLength(2),
-        // In the real world you'd want to be very careful about having
-        // an upper limit like this because people can sometimes have
-        // very long names. This demonstrates that it's possible, though,
-        // to have maximum length limits.
-        Validators.maxLength(50),
+        Validators.minLength(2), //Sets the min required length, which is 2
+        Validators.maxLength(50), // Sets max limit of characters, which is 50
         (fc) => {
           if (fc.value.toLowerCase() === 'abc123' || fc.value.toLowerCase() === '123abc') {
             return ({existingOwner: true});
@@ -71,11 +64,39 @@ export class AddTodoComponent implements OnInit {
 
       ])),
 
-      status: new FormControl(),
+      status: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^(true|false)$'),
+      ])),
 
-      category: new FormControl(),
+      category: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(50),
+        (fc) => {
+          if (fc.value.toLowerCase() === 'abc123' || fc.value.toLowerCase() === '123abc') {
+            return ({existingCategory: true});
+          } else {
+            return null;
+          }
+        },
 
-      body: new FormControl()
+      ])),
+
+      body: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(200),
+        (fc) => {
+          if (fc.value.toLowerCase() === 'abc123' || fc.value.toLowerCase() === '123abc') {
+            return ({existingBody: true});
+          } else {
+            return null;
+          }
+        },
+
+      ])),
+
     });
 
   }
